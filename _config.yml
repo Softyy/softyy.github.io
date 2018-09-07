@@ -41,6 +41,10 @@ minima:
 # Build settings
 theme: minima
 
+header_pages:
+  - about.md
+  - teaching.md
+
 plugins:
  - jekyll-feed
  - jekyll-seo-tag
