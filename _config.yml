@@ -2,7 +2,7 @@ title: CJAdkins
 author: Christopher J. Adkins
 email: adkincj@gmail.com
 description: > # this means to ignore newlines until "twitter_username:"
-  A little bit of math, a little bit of code. A game here and there, let's learn a few things together.
+  A little bit of math, a little bit of code and a game here and there. Let's learn things together.
 
 # social links
 #twitter_username:
@@ -13,6 +13,9 @@ github_username: softyy
 # flickr_username: jekyll
 # instagram_username: jekyll
 linkedin_username: adkinscj
+codingame:
+  id: 7d4b82a005185725a3c442367ca3848c5849451
+  username: softyy
 # pinterest_username: jekyll
 # youtube_username: jekyll
 # googleplus_username: +jekyll
