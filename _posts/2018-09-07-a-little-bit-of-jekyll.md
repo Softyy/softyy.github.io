@@ -4,6 +4,7 @@ title: "A little bit of jekyll in the morning"
 categories: random
 author: "Christopher J. Adkins"
 meta: "Jekyll"
+comments: true
 ---
 
 {% highlight python %}

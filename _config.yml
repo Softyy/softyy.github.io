@@ -24,6 +24,9 @@ linkedin_username: adkinscj
 # - username: jekyll2
 #   instance: example.com
 
+disqus:
+  shortname: cjadkins
+
 google_analytics: UA-100226425-1
 
 show_excerpts: false # set to true to show excerpts on the homepage
@@ -35,15 +38,12 @@ minima:
 
 # If you want to link only specific pages in your header, uncomment
 # this and add the path to the pages in order as they should show up
-#header_pages:
-# - about.md
-
-# Build settings
-theme: minima
-
 header_pages:
   - about.md
   - teaching.md
+
+# Build settings
+theme: minima
 
 plugins:
  - jekyll-feed

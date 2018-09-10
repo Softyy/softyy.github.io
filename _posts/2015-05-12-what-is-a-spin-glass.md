@@ -5,6 +5,7 @@ categories: math
 author: "Christopher J. Adkins"
 meta: "Spin Glass math"
 usemathjax: true
+comments: true
 ---
 In an attempt to motivate myself into keeping this updated, I'll try to write a few notes on what spin glasses are and why we care. Our first example will be glass (mostly SiO2), the following is a snapshot of its atomic structure.
 
