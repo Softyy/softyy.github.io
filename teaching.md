@@ -4,6 +4,10 @@ title: Teaching
 permalink: /teaching/
 ---
 
+This is my collection of sample coding questions that I've done practicing for interviews and fun. 
+
+-
+
 This is my collection of notes for various classes I assisted with at the University of Toronto. Maybe some lost soul will find their way here to find some assistance with a question they're struggling with. 
 
 - [MAT 188 : Linear Algebra I](/teaching/mat188)
