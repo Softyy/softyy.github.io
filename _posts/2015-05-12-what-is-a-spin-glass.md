@@ -10,7 +10,7 @@ comments: true
 In an attempt to motivate myself into keeping this updated, I'll try to write a few notes on what spin glasses are and why we care. Our first example will be glass (mostly SiO2), the following is a snapshot of its atomic structure.
 
 {:.center}
-![glass](/assets/post-assets/glass.png)
+![glass](/assets/posts/glass.png)
 
 As you can see the structure is irregular and looks slightly random. Why is this the case? It's because not all atoms are happy with their magnetic spin alignment! The atoms are forced into a frustrated position from the other atoms in the system (I'm vague on "other "atoms because this is one of our key choices in the working model). It may be better to call these objects frustrated magnets, since that's what they are, though the name spin glass comes from trying to understand the structure of atoms with spins frozen in place (like glass!)
 
