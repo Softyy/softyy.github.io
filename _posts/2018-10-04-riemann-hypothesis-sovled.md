@@ -3,7 +3,7 @@ layout: post
 title: "The Riemann Hypothesis solved?"
 categories: math
 author: "Christopher J. Adkins"
-meta: "Riemann Hypothesis math"
+tags: [Riemann,Hypothesis,Math]
 usemathjax: true
 comments: true
 ---

@@ -3,7 +3,7 @@ layout: post
 title: "What is a Spin Glass?"
 categories: math
 author: "Christopher J. Adkins"
-meta: "Spin Glass math"
+tags: [Spin,Glass,Math]
 usemathjax: true
 comments: true
 ---

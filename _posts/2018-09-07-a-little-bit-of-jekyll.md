@@ -3,7 +3,7 @@ layout: post
 title: "A little bit of jekyll in the morning"
 categories: random
 author: "Christopher J. Adkins"
-meta: "Jekyll"
+tags: [Jekyll]
 comments: true
 ---
 
