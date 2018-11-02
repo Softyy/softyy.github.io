@@ -29,6 +29,9 @@ google_analytics: UA-100226425-1
 
 show_excerpts: false # set to true to show excerpts on the homepage
 
+paginate: 8
+paginate_path: /page:num/
+
 # Minima date format
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
 minima:
@@ -46,3 +49,4 @@ theme: minima
 plugins:
  - jekyll-feed
  - jekyll-seo-tag
+ - jekyll-paginate
