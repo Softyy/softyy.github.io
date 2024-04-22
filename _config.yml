@@ -42,6 +42,7 @@ minima:
 header_pages:
   - about.md
   - teaching.md
+  - presentations.md
 
 # Build settings
 theme: minima

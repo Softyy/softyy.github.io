@@ -1,0 +1,24 @@
+---
+layout: default
+---
+<div class="reveal">
+    {{ content }}
+</div>
+<figure>
+    <label>Controls:</label>
+    <ul>
+        <li>f ~ fullscreen</li>
+        <li>o ~ navigation view</li>
+        <li>arrow keys ~ navigation</li>
+    </ul>
+</figure>
+<script>
+    Reveal.initialize({
+        embedded: true,
+        slideNumber: 'c/t',
+        plugins: [RevealHighlight, RevealNotes]
+    });
+    document.querySelector('.reveal').style.width = '100%';
+    document.querySelector('.reveal').style.height = '400px';
+    Reveal.layout();
+</script>

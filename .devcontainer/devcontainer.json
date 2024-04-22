@@ -1,0 +1,9 @@
+{
+	"name": "Debian",
+	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+	"features": {
+		"ghcr.io/devcontainers/features/ruby:1": {
+			"version": "3.1"
+		}
+	}
+}
