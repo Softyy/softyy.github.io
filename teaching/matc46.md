@@ -1,7 +1,7 @@
 ---
 layout: page
 title: MAT C46 - Differential Equation II
-permalink: /teaching/matc36
+permalink: /teaching/matc46
 ---
 
 ## Winter 2016
