@@ -12,11 +12,13 @@ layout: default
         <li>arrow keys ~ navigation</li>
     </ul>
 </figure>
+<h3>Slides Powered by <a href="https://revealjs.com" target="_blank"><img height="32px"
+            src="/assets/images/reveal-black-text.svg" alt="reveal-logo" /></a></h3>
 <script>
     Reveal.initialize({
         embedded: true,
         slideNumber: 'c/t',
-        plugins: [RevealHighlight, RevealNotes]
+        plugins: [RevealHighlight, RevealMarkdown, RevealNotes]
     });
     document.querySelector('.reveal').style.width = '100%';
     document.querySelector('.reveal').style.height = '400px';

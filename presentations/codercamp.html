@@ -13,24 +13,52 @@ usereveal: True
         <img src="https://avatars.githubusercontent.com/u/19696120?v=4" />
         <ul>
             <li>Chris Adkins (<a href="https://github.com/Softyy" target="_blank">@Softyy</a>)</li>
-            <li>Web Dev</li>
-            <li></li>
+            <li>Web Dev (mostly)</li>
+            <li>Entrepreneur: <a href="https://dlvvr.com/" target="_blank">Dlvvr</a></li>
+            <li>Dad</li>
         </ul>
     </section>
     <section>
-        <h3>What's a container?</h3>
-    </section>
-    <section>
-        <h3>Why should I care?</h3>
-    </section>
-    <section>
-        <h3>Containers used for development</h3>
+        <section>
+            <h3>What are Dev Containers?</h3>
+        </section>
+        <section>
+            <p>Dev containers are isolated environments that encapsulate all dependencies, tools, and
+                configurations required for a development project.</p>
+
+            <!-- <p>They ensure consistent development environments across different machines.</p> -->
+        </section>
     </section>
     <section>
         <section>
-            <h3>devcontainers</h3>
-            <h4>Meet the devcontainer.json spec</pre>
-            </h4>
+            <h3>Benefits of Using Dev Containers</h3>
+        </section>
+        <section>
+            <ul>
+                <li>Consistent Development Environments</li>
+                <li>Simplified Onboarding</li>
+                <li>Isolation of Development Environments</li>
+                <li>Integration with CI/CD Pipelines</li>
+                <li>Cross-platform Development</li>
+                <li>Remote Development (e.g. Codespaces)</li>
+            </ul>
+        </section>
+    </section>
+    <section>
+        <section>
+            <h3>Key Features</h3>
+            <ul>
+                <li>There's a great cli</li>
+                <li>You get your ci setup for free</li>
+                <li>VS, VS Code, and IntelliJ have good extensions</li>
+                <small>(It's the killer feature in VS Code imo)</small>
+                <li>Great for trying new langs</li>
+            </ul>
+        </section>
+    </section>
+    <section>
+        <section>
+            <h3>Setting Up a Dev Container</h3>
             <pre><code data-trim data-noescape>
             {
                 "name": "Debian w/ Ruby",
@@ -45,7 +73,39 @@ usereveal: True
             <a href="https://containers.dev/features" target="_blank">Features</a>
         </section>
         <section>
-
+            <pre><code data-trim data-noescape>
+            {
+                "name": "Ubuntu w/ Python",
+                "image": "ubuntu:latest",
+                "features": {
+                    "ghcr.io/devcontainers/features/python:1": {
+                        "version": "3.12"
+                    }
+                }
+            }
+            </code></pre>
         </section>
+        <section>
+            <h3>Let's take a quick peek at some more complex examples.</h3>
+            <ul>
+                <li><a href="https://github.com/qdm12/godevcontainer">Go</a></li>
+                <li><a href="https://github.com/microsoft/vscode-remote-try-rust">Rust</a></li>
+                <li><a href="https://github.com/microsoft/vscode-remote-try-python">Python</a></li>
+                <li><a href="https://github.com/microsoft/vscode-remote-try-node">Node</a></li>
+            </ul>
+        </section>
+    </section>
+    <section>
+        <h3>Devcontainer Demo</h3>
+    </section>
+    <section>
+        <h3>But wait, there's more.</h3>
+        <ul>
+            <li><a href="https://tilt.dev">Tilt</a></li>
+            <li><a href="https://mirrord.dev">mirrord</a></li>
+        </ul>
+    </section>
+    <section>
+        <h3>Q&A</h3>
     </section>
 </div>
