@@ -159,7 +159,7 @@ def convert_to_django_settings(_settings: BaseSettings, prefix: str = ""):
                 _prefix = "" if top_level else f"{prefix}{field_name}_"
                 extract_django_settings(value, prefix=_prefix)
             else:
-                django_key = f"{prefix}{field_name}".key.upper()
+                django_key = f"{prefix}{field_name}".upper()
                 if django_key in django_settings:
                     log.warning("Duplicate Django setting: %s", django_key)
                 django_settings[django_key] = value
