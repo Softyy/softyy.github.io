@@ -174,7 +174,7 @@ def convert_to_django_settings(_settings: BaseSettings, prefix: str = ""):
     return django_settings
 ```
 
-Now `DJANGO_DEBUG` is transformed to `DEBUG` as we wanted via the flagged prefix logic. Probably a more important example would be settings dictionaries on the django side. Probably the most important dictionary settings is your database connection. Recall it looks something like:
+Now `DJANGO_DEBUG` is transformed to `DEBUG` as we wanted via the flagged prefix logic. Probably a more important example would be settings dictionaries on the django side. Let's look at the database connection as our example. Recall it looks something like:
 
 ```python
 DATABASES = {
