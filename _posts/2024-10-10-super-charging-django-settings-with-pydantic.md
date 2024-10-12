@@ -235,8 +235,12 @@ With the new functionality at hand, we can set these values with environment var
 
 ```bash
 # .env
-DATABASES__DEFAULT__ENGINE=django.db.backends.sqlite3
-DATABASES__DEFAULT__NAME=db.sqlite3
+DATABASES__DEFAULT__ENGINE=django.db.backends.postgresql
+DATABASES__DEFAULT__NAME=mydatabase
+DATABASES__DEFAULT__USER=mydatabaseuser
+DATABASES__DEFAULT__PASSWORD=mypassword
+DATABASES__DEFAULT__HOST=127.0.0.1
+DATABASES__DEFAULT__PORT=5432
 ```
 
 You can even set calculated properties this way!
