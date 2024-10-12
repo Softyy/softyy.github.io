@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Super charging Django settings with pydantic"
-categories: python, django, pydantic
+categories: django
 author: "Christopher J. Adkins"
 tags: [Python,Django,Pydantic,Web,Settings]
 usemathjax: false
@@ -77,15 +77,18 @@ log = logging.getLogger()
 def convert_to_django_settings(settings: BaseSettings, prefix: str = ""):
     django_settings = {}
 
+    def set_key(key,value):
+        django_key = key.upper()
+        if django_key in django_settings:
+            log.warning("Duplicate Django setting: %s", django_key)
+        django_settings[django_key] = value
+
     def extract_django_settings(s: BaseSettings, prefix: str = ""):
         for field_name, value in s:
             if isinstance(value, BaseSettings):
                 extract_django_settings(value, prefix=f"{prefix}{field_name}_")
             else:
-                django_key = f"{prefix}{field_name}".upper()
-                if django_key in django_settings:
-                    log.warning("Duplicate Django setting: %s", django_key)
-                django_settings[django_key] = value
+                set_key(f"{prefix}{field_name}",value)
 
     extract_django_settings(settings, prefix)
     return django_settings
@@ -134,16 +137,16 @@ class DjangoSettings(BaseSettings):
 
 class AppSettings(BaseSettings):
     ...
-    django: Annotated[DjangoSettings, {"top_level": True}] = Field(default_factory=DjangoSettings)
+    django: Annotated[DjangoSettings, {"top_level"}] = Field(default_factory=DjangoSettings)
     ...
 ```
 
-Functionally this is identical to the previous implementation, but now we've got some metadata associated with the field. I'll cut right to the chase and show you how to access this data with pydantic. 
+Functionally this is identical to the previous implementation, but now we've got some metadata associated with the field. I'll cut right to the chase and show you how to access this data with pydantic. (Warning: `metadata` can contain whatever types you pass into it via `Annotated`)
 
 ```python
-def get_metadata(field_name, s: BaseSettings, key: str, default: Any = False):
+def get_metadata(field_name, s: BaseSettings, key: str):
     field_info = s.model_fields[field_name]
-    return next((_[key] for _ in field_info.metadata if key in _), default)
+    return next((True for _ in field_info.metadata if key in _), False)
 ```
 
 So now that conversion function can be customized to whatever you want to happen with whatever metadata you decide to include. e.g.
@@ -152,6 +155,12 @@ So now that conversion function can be customized to whatever you want to happen
 def convert_to_django_settings(_settings: BaseSettings, prefix: str = ""):
     django_settings = {}
 
+    def set_key(key,value):
+        django_key = key.upper()
+        if django_key in django_settings:
+            log.warning("Duplicate Django setting: %s", django_key)
+        django_settings[django_key] = value
+
     def extract_django_settings(s: BaseSettings, prefix: str = ""):
         for field_name, value in s:
             if isinstance(value, BaseSettings):
@@ -159,15 +168,77 @@ def convert_to_django_settings(_settings: BaseSettings, prefix: str = ""):
                 _prefix = "" if top_level else f"{prefix}{field_name}_"
                 extract_django_settings(value, prefix=_prefix)
             else:
-                django_key = f"{prefix}{field_name}".upper()
-                if django_key in django_settings:
-                    log.warning("Duplicate Django setting: %s", django_key)
-                django_settings[django_key] = value
+                set_key(f"{prefix}{field_name}",value)
 
     extract_django_settings(_settings, prefix)
     return django_settings
 ```
 
-Now `DJANGO_DEBUG` is transformed to `DEBUG` as we wanted via the flagged prefix logic.
+Now `DJANGO_DEBUG` is transformed to `DEBUG` as we wanted via the flagged prefix logic. Probably a more important example would be settings dictionaries on the django side. Probably the most important dictionary settings is your database connection. Recall it looks something like:
+
+```python
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "mydatabase",
+        "USER": "mydatabaseuser",
+        "PASSWORD": "mypassword",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
+    } 
+}
+```
+
+We can achieve something in pydantic settings with something like this:
+
+```python
+class DatabaseConnection(BaseSettings):
+    engine: str
+    name: str
+    user: Optional[str] = None
+    password: Optional[str] = None
+    host: Optional[str] = None
+    port: Optional[str] = None
+
+class AppDatabaseSettings(BaseSettings):
+    default: DatabaseConnection = Field(default_factory=DatabaseConnection)
+
+class AppSettings(BaseSettings):
+    ...
+    databases: Annotated[AppDatabaseSettings, {"as_dict"}] = Field(default_factory=AppDatabaseSettings)
+    ...
+```
+
+and we'll need to add a bit of logic to our translation func to handle `as_dict`. Something like this suffices:
+
+```python
+def convert_to_django_settings(_settings: BaseSettings, prefix: str = ""):
+    ...
+
+    def extract_django_settings(s: BaseSettings, prefix: str = ""):
+        for field_name, value in s:
+            if isinstance(value, BaseSettings):
+                as_dict = get_metadata(field_name, s, key="as_dict")
+                if as_dict:
+                    set_key(f"{prefix}{field_name}",value.model_dump(exclude_none=True))
+                    continue
+                top_level = get_metadata(field_name, s, key="top_level")
+                _prefix = "" if top_level else f"{prefix}{field_name}_"
+                extract_django_settings(value, prefix=_prefix)
+            else:
+                set_key(f"{prefix}{field_name}",value)
+
+    ...
+```
+
+With the new functionality at hand, we can set these values with environment variables like this:
+
+```bash
+# .env
+DATABASES__DEFAULT__ENGINE=django.db.backends.sqlite3
+DATABASES__DEFAULT__NAME=db.sqlite3
+```
+
+You can even set calculated properties this way!
 
 Anyhow, just wanted to share this approach in case others are looking to use pydantic settings with django as well. Feel free to leave a comment if you have a question about a specific situtation. 
