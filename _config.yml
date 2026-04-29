@@ -4,6 +4,9 @@ email: adkincj@gmail.com
 description: > # this means to ignore newlines until "twitter_username:"
   A little bit of math, a little bit of code and a game here and there. Let's learn things together.
 
+host: 0.0.0.0
+port: 4000
+
 # social links
 #twitter_username:
 github_username: softyy
@@ -48,6 +51,6 @@ header_pages:
 theme: minima
 
 plugins:
- - jekyll-feed
- - jekyll-seo-tag
- - jekyll-paginate
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-paginate

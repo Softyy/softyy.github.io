@@ -1,0 +1,218 @@
+---
+layout: presentation
+title: Overcomplicating My Home Setup
+permalink: /presentations/overcomplicating-my-home-setup
+usereveal: True
+---
+
+<div class="slides">
+  <section>
+    <h2>The Bed Time Problem</h2>
+    <p>&#x1F631; k8s at home &#x1F635;</p>
+  </section>
+  <section>
+    <h3>Who's this guy?</h3>
+    <img src="https://avatars.githubusercontent.com/u/19696120?v=4" />
+    <ul>
+      <li>
+        Chris Adkins (<a href="https://github.com/Softyy" target="_blank">@Softyy</a>)
+      </li>
+      <li>Web Dev (mostly)</li>
+      <li>
+        Entrepreneur: <a href="https://dlvvr.com/" target="_blank">Dlvvr</a>
+      </li>
+      <li>Dad</li>
+    </ul>
+  </section>
+
+  <section>
+    <section>
+      <h3>The Issue</h3>
+      <p>TODO: pic of felix's room</p>
+    </section>
+    <section>
+      <h3>The Solution</h3>
+      <img
+        src="https://www.home-assistant.io/images/blog/2023-09-ha10/home-assistant-logo-new.png"
+      />
+    </section>
+    <section
+      data-background-image="https://media1.tenor.com/m/OSviYqOqvOMAAAAd/automation-audio-engineer.gif"
+      data-background-size="70%"
+      data-background-repeat
+    ></section>
+  </section>
+
+  <section>
+    <section>
+      <img
+        src="https://1000logos.net/wp-content/uploads/2022/07/Kubernetes-Logo-500x281.png"
+      />
+    </section>
+    <section>
+      <h3>Swarm, why didn't you win</h3>
+      <img src="https://raw.githubusercontent.com/docker-library/docs/471fa6e4cb58062ccbf91afc111980f9c7004981/swarm/logo.png">
+    </section>
+  </section>
+
+  <section>
+    <section
+      data-background-image="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXk0djByNDFkMndhYnU0cWVrcHhnOGI4Z2twejR4ZnNzdXRnbmFpbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eRKDMSarMgSWXGag9Z/giphy.gif"
+      data-background-size="60%"
+      data-background-repeat
+    ></section>
+    <section>
+      <h3>What I settled for</h3>
+      <img src="/assets/images/home-network.png" />
+    </section>
+    <section>
+      <div class="r-stack">
+        <h3>What does it look like</h3>
+        <img class="fragment" src="https://turingpi.com/wp-content/webp-express/webp-images/uploads/2024/01/1-1024x773.jpg.webp" />
+        <img class="fragment" src="https://turingpi.com/wp-content/webp-express/webp-images/uploads/2022/08/Gray_RK1-front-1.png.webp"/>
+        <img class="fragment" height="700px" src="https://cdn11.bigcommerce.com/s-am5zt8xfow/images/stencil/1280x1280/products/2418/8131/1533-1a__05943.1639414370.1280.1280__76488.1756380528.jpg?c=2"/>
+      </div>
+    </section>
+  </section>
+
+  <section>
+    <section
+      data-background-image="https://emergentmath.com/wp-content/uploads/2023/12/tumblr_127bf9cd27cda1bcb4ca82c12f8d1b99_d87e4b88_540.webp"
+      data-background-size="70%"
+      data-background-repeat
+    ></section>
+    <section
+      data-background-image="https://argo-cd.readthedocs.io/en/stable/assets/argocd-ui.gif"
+      data-background-size="70%"
+      data-background-repeat
+    ></section>
+    <section>
+      <h3>What this looks like</h3>
+      <pre><code data-trim>
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: home-assistant
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/Softyy/adkins-cluster
+      targetRevision: HEAD
+      path: apps/home-assistant/resources/
+  destination:
+    name: "in-cluster"
+    namespace: home-assistant
+  syncPolicy:
+    automated:
+      enabled: true
+    syncOptions:
+      - CreateNamespace=true
+            </code></pre>
+    </section>
+  </section>
+
+  <section>
+    <section
+      data-background-image="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzV1MTBsdHY2a3dyMXF3aTkxbzRuamdyZ2tucG1iM2pla21paXY5aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q24AgGI3B5Bhx6Lqah/giphy.gif"
+      data-background-size="70%"
+      data-background-repeat
+    ></section>
+    <section>
+      <h3>App of Apps</h3>
+      <img src="/assets/images/app-of-apps.png" />
+    </section>
+    <section>
+      <h3>Oh no, my secrets!</h3>
+      <pre><code data-trim>
+apiVersion: isindir.github.com/v1alpha3
+kind: SopsSecret
+metadata:
+  name: grafana-k8s-monitoring
+  namespace: grafana
+spec:
+  suspend: false
+  secretTemplates:
+    - name: grafana-k8s-monitoring
+      stringData:
+        API_TOKEN: ENC[AES256_GCM,data:P+KJAptu7ssNVjkOxR9kpAYGE4Yo9Tzg0v86Try4BzcVy7JskYmiHRjiujXDCSYCSz4I1paTmxCdcpVoVmvzqxlosIVFlENzhD8W2ydMGUTqxXZ1ydPzzm2OjyeQRRGem/jbOqqZ4kuY0CltvIMRLbCjTAGNu3f8pjrF5jgqD+LJESLF5WKm3kgVHVWx5NRvUOCtDIUiew+A0LGpjyEhi9W/JzZ68OWVFOY3AKCiw+efLL2R/nCER7u1wj8=,iv:Dx4ObGdffMq3UEmpOr8QRerzsR0QAIof6glTDH9IDlE=,tag:48nUCWGIcb66w6Yd492lkw==,type:str]
+        PROM_USERNAME: ENC[AES256_GCM,data:GsABC/Hueg==,iv:+pLoa2X7FxQbLEbU2MCDNzdNKvCk+v26mQfKhdk2IRQ=,tag:LHEaLAM6hLN79RfYM+6I7A==,type:str]
+        PROM_HOST: ENC[AES256_GCM,data:9BOGYlO2DXKltZgusi6ddH3/nYAbz4EwjN2j89WZsNqlWHJZ5qKiDp/nW69JDCtGJIGxhEc=,iv:6ZIeb4Zq/i8qbst8ubE0Mv9PNZsIA8zfHUmaJNDIVf8=,tag:fgIwG7AgiF1NuAZwXIvV8Q==,type:str]
+        LOKI_USERNAME: ENC[AES256_GCM,data:EYO1Y1BY7A==,iv:2LG7l29tm7v3IkJ6Wk5/j3sivNzhjPGn5V77TcRsfQA=,tag:R/Z9ta0likd4jJjzSIM9JQ==,type:str]
+        LOKI_HOST: ENC[AES256_GCM,data:gsOZ8QaJO9rVaHLdGwqfGUSBrVFeLUEzovwerII+ho9c,iv:2KLXCWJ93MxfidkY4dmOJfRTeDwOVqhlRHuADLnhBTE=,tag:se5gDH9WwYDEUOg6ru+w6Q==,type:str]
+        OTLP_USERNAME: ENC[AES256_GCM,data:EzSIgztw7Q==,iv:qajhyguDxmSu5irlCkbxrWgNIEelqDjY6mE6ego4qs4=,tag:NTawcyMrdPbNZrtwOHSWlA==,type:str]
+        OTLP_HOST: ENC[AES256_GCM,data:58Zbssulu6wpyuPXx/g9wMdEnHdXgaiUOi4TliamA6R47RYwIliF1IvwKD8iT7c=,iv:ua2uBI5xChNPFOe1D/HQiYr7rsod5ZouPEFM1W2SC/8=,tag:YO49IWhOgRpnrwzPylMW5A==,type:str]
+sops:
+  age:
+    - recipient: age1qqca3tgp3suzgspun8prklyqpjjnzluqjqqfdahmgn0dvupnzvzqs46egd
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBIYlJlL2ZBb2FWcEd0aFps
+        WTJweWhTVDdpMW1kMEhpNzVNcXVtNUxrRm44CkxlMjIrc1lFNVBwTjVpeU5JS0FW
+        N1ZLTEp1RmlhTm9sM0k1eWZTc2kxM3MKLS0tIEY2YWdJTVRmSVloS1hqZUM2OHpH
+        dlhtUURvdmFYcnRrbFJNVDBKMC8vcEEK5aCvLmVOw0W4qrRpp0n3WkYHU9D8KHI+
+        y1pE3BCOTYuL6aR30JIQIkdZ/Ctgox6IKAhSGYLzZRmBfWj2sFVz8A==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2026-01-04T21:40:53Z"
+  mac: ENC[AES256_GCM,data:FDJYihrQp+FAAql6i1AEKlw6IIw/C/pmBaIiNR6x6dsd/rrctvUY2awIcSZq2dV1hDexj5MbSfNUjA/8B0eBiDBb7MYb+UzW+kuCOykALebl+uLD3yPIYz+x0F/w7qA32ipkkbBZl3aAWQk3AgAVCr9GwOnHCnIw0FmPRfWa6iE=,iv:e/5BNHbENLSmN7uA5O+dQ4z0loL5QYIiFgSKUkMK7Z4=,tag:QTWJXr1PsaDz9gybyZnoeg==,type:str]
+  encrypted_regex: ^(data|stringData)$
+  version: 3.11.0
+      </code></pre>
+    </section>
+  </section>
+
+  <section>
+    <section
+      data-background-image="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWIzY2J3czcwdW9mYmtzZTRjMWxtM3RxNHdyN3p4OGQ3YnU2NHN1ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/10zsjaH4g0GgmY/giphy.gif"
+      data-background-size="70%"
+      data-background-repeat
+    ></section>
+    <section>
+      <div class="r-stack">
+        <h3>What this looks like</h3>
+        <img
+          class="fragment"
+          src="/assets/images/renovate.png"
+          height="500px"
+        />
+
+        <pre class="fragment"><code data-trim>
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+...
+spec:
+  ...
+  syncPolicy:
+    automated:
+      enabled: true
+            </code></pre>
+        <img
+          class="fragment"
+          height="400px"
+          src="https://kured.dev/img/kured.png"
+        />
+        <img
+          class="fragment"
+          src="/assets/images/automated-upgrades-k3s.png"
+      </div>
+    </section>
+  </section>
+
+  <section>
+    <h3>Home Tour</h3>
+  </section>
+
+  <section>
+    <h3>TODO: pic of felix sleeping</h3>
+  </section>
+
+  <section>
+    <h3>Questions?</h3>
+  </section>
+  <section>
+    <h3>Thanks for listening</h3>
+  </section>
+
+</div>
