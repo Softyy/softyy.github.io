@@ -169,6 +169,37 @@ sops:
 
   <section>
     <section
+      data-background-image="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzEwdDVqaTFmOTU2bW9uYXZmcnZ5OTV5enlnbG94NWZta253d2dmMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FJxEptIxgsEVi/giphy.gif"
+      data-background-size="50%"
+      data-background-repeat
+    >
+    </section>
+    <section>
+      <pre><code data-trim>
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: home-assistant
+  namespace: home-assistant
+  labels:
+    app.kubernetes.io/name: home-assistant
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`iot.adkins.in`)
+      priority: 10
+      services:
+        - name: home-assistant
+          port: 8123
+  tls:
+    secretName: wildcard-cert
+      </code></pre>
+    </section>
+  </section>
+  <section>
+    <section
       data-background-image="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWIzY2J3czcwdW9mYmtzZTRjMWxtM3RxNHdyN3p4OGQ3YnU2NHN1ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/10zsjaH4g0GgmY/giphy.gif"
       data-background-size="70%"
       data-background-repeat
