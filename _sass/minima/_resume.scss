@@ -1,0 +1,143 @@
+.resume {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.resume-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid $grey-color-dark;
+
+  @include media-query($on-palm) {
+    text-align: center;
+  }
+}
+
+.resume-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.resume-header-text {
+  text-align: center;
+}
+
+.resume-name {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  letter-spacing: -1px;
+  color: $text-color;
+}
+
+.resume-subtitle {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: $grey-color;
+  margin-bottom: 0.75rem;
+}
+
+.icon-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
+
+  .icon-link-item {
+    display: inline;
+  }
+
+  .icon-link {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0.35rem;
+
+    .icon {
+      width: 28px;
+      height: 28px;
+      vertical-align: middle;
+      color: $grey-color;
+      transition: color 0.2s ease;
+
+      path {
+        fill: currentColor;
+      }
+    }
+
+    &:hover .icon {
+      color: $brand-color;
+    }
+  }
+}
+
+.resume-contact {
+  margin-top: 0.5rem;
+
+  a {
+    color: $brand-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.resume-body {
+  h2 {
+    border-bottom: 1px solid $grey-color-light;
+    padding-bottom: 0.25rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+    color: $text-color;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.15rem;
+    font-weight: 700;
+    color: $text-color;
+  }
+
+  h4 {
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 400;
+    color: $grey-color;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  h5 {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: $grey-color-dark;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    margin-bottom: 0.75rem;
+  }
+
+  ul {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+
+    li {
+      margin-bottom: 0.25rem;
+    }
+  }
+}
