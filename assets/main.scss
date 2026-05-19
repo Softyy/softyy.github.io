@@ -4,6 +4,29 @@
 
 @import "minima";
 
+@page {
+    size: auto;
+    margin: 0mm;
+  }
+
+  @media print {
+    .site-header,
+    .site-footer {
+      display: none !important;
+    }
+
+    .wrapper {
+      max-width: 100% !important;
+      padding-left: 5mm !important;
+      padding-right: 5mm !important;
+    }
+
+    .page-content {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+  }
+
 .center {
     text-align: center;
   }
@@ -17,7 +40,7 @@
     display: inline-block;
   }
 
-.pagination a {    
+.pagination a {
     &:hover {
         background-color: #f1f1f1;
         color: #333;
